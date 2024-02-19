@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Creating VM</title>
+</head>
+<body>
+    <h1>Enetr data for creating VM</h1>
+    <form action="submit.php" method="post">
+        <label for="name1">Guest Name:</label>
+        <input type="text" id="vname" name="vname" required><br><br>
+        
+        <label for="name2">Guest vCPU:</label>
+        <input type="text" id="vcpu" name="vcpu" required><br><br>
+
+        <label for="name3">Guest_vMEM_(mb):</label>
+        <input type="text" id="vmem" name="vmem" required><br><br>
+        
+        <label for="loc">Location:</label>
+        <select id="loc" name="loc">
+        <option value="vcenter_servers">Name</option>
+
+        </select><br><br>
+	
+	<label for="datacntr">Datacenter</label>
+	<select id="datacntr" name="datacntr">
+	<option value="datacenter">DC</option>
+
+	</select>
+	<br><br>
+	                      
+        <label for="loc_cl">Location Cluster:</label>
+        <select id="loc_cl" name="loc_cl">
+        <option value="Cluster">Cluster</option>
+        <option value="Cluster1">Cluster1</option>
+        <option disabled>------------</option>
+        <option value="Cluster2">Cluster2</option>
+        </select> <br><br>
+
+        <label for="data_stor">Select datastore:</label>
+        <select id="data_stor" name="data_stor">
+        <option value="datastore">datastore</option>
+        <option value="datastore">datastore</option>
+        <option disabled>------------</option>
+        <option value="datastore">datastore</option>
+	</select>
+	<br><br>
+
+        <label for="name4">Disk size</label>
+        <input type="text" id="dsize" name="dsize" required><br><br>
+	<br>
+
+	<label>Select template:</label>
+	<br>
+        <iframe src="mir_templ.php"height="50px" width="370px"></iframe>
+	<br><br>
+        <iframe src="msk_templ.php"height="50px" width="370px"></iframe>
+        <br><br>
+        
+        <label for="message">Notes:</label>
+        <textarea id="message" name="message" rows="5" cols="30" required></textarea><br><br>
+        <input type="submit" value="Submit">
+        <br><br> 
+
+    </form>
+    <form action="cgi-bin/push.cgi" method="post">
+    <input type="submit" value="Create">
+    </form>  
+
+</body>
+</html>

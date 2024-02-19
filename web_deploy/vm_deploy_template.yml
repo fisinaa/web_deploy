@@ -1,0 +1,47 @@
+---
+- name: deploy vm
+  hosts: localhost 
+  become: false
+  gather_facts: false
+
+  collections:
+    - community.vmware
+  pre_tasks:
+    - include_vars:
+        file: /var/www/html/names.yml
+        name: webb
+    - include_vars:
+        file: /home/Playbook/web_deploy/vars.yml
+        name: cred
+    - include_vars:
+        file: /var/www/html/tmpl.yml
+        name: tmplt
+
+#  vars_prompt:
+#    - name: "vcenter_username"
+#      promt: "Enter username"
+#      private: no
+#    - name: "vcenter_password" 
+#      promt: "Enter passwors"
+#      private: no
+
+  tasks:
+    - name: clone VM
+      vmware_guest:
+        hostname: "{{ webb.g_loc }}"
+        username: "{{ cred.vcenter_username }}"
+        password: "{{ cred.vcenter_password }}"
+        validate_certs: "{{ cred.vcenter_validate_certs }}"
+        datacenter: "{{ webb.g_dcntr }}"
+        cluster: "{{webb.g_loc_cl}}"
+        folder: "test"
+        name: "{{ webb.g_name }}"
+        annotation: "{{ webb.g_notes }}"
+        template: "{{ tmplt.g_tmpl }}"
+        disk:
+        - size_gb: "{{ webb.g_dsz }}"
+          datastore: "{{ webb.g_ds }}"
+        hardware:
+            memory_mb: "{{ webb.g_vmem }}"
+            num_cpus: "{{ webb.g_vcpu }}"
+#           num_cpu_cores_per_socket: 2
